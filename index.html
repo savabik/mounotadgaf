@@ -3,8 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <title>তুমি আছো...</title>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Shadows+Into+Light&display=swap" rel="stylesheet" />
   <style>
+    /* Custom font faces */
+    @font-face {
+      font-family: 'f_R';
+      src: url('f_R.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'f_I';
+      src: url('f_I.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -15,7 +29,7 @@
       min-height: 100vh;
       background: url('backiee-80266-landscape.jpg') no-repeat center center fixed;
       background-size: cover;
-      font-family: 'Shadows Into Light', cursive;
+      font-family: 'f_I', cursive, sans-serif;
       color: #f5e6e8;
       overflow: hidden;
       position: relative;
@@ -64,7 +78,7 @@
     }
 
     h1 {
-      font-family: 'Dancing Script', cursive;
+      font-family: 'f_R', cursive;
       font-size: 42px;
       color: #f1c0c8;
       margin-bottom: 22px;
@@ -91,7 +105,7 @@
     }
 
     p {
-      font-family: 'Shadows Into Light', cursive;
+      font-family: 'f_I', cursive;
       font-size: 18px;
       color: #d9b9bc;
       text-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
@@ -99,7 +113,7 @@
 
     .signature {
       margin-top: 26px;
-      font-family: 'Dancing Script', cursive;
+      font-family: 'f_I', cursive;
       font-size: 20px;
       color: #e7a3ad;
       font-style: italic;
@@ -113,7 +127,7 @@
 
     .ending {
       margin-top: 22px;
-      font-family: 'Shadows Into Light', cursive;
+      font-family: 'f_I', cursive;
       font-size: 16px;
       color: #e6bfc3;
       font-style: italic;
