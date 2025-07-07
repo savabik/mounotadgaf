@@ -23,27 +23,6 @@
       overflow: hidden;
     }
 
-    .snow {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 999;
-    }
-
-    .cursor-glow {
-      position: fixed;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background: radial-gradient(circle, #ff9dbb 0%, transparent 60%);
-      pointer-events: none;
-      mix-blend-mode: screen;
-      z-index: 1000;
-    }
-
     .overlay {
       position: absolute;
       top: 0; left: 0;
@@ -55,7 +34,7 @@
 
     .poem-container {
       position: relative;
-      z-index: 1;
+      z-index: 2;
       background: rgba(255, 255, 255, 0.08);
       padding: 40px 50px;
       border-radius: 20px;
@@ -72,6 +51,19 @@
       color: #ffcdd9;
       margin-bottom: 25px;
       text-shadow: 0 0 10px rgba(255, 150, 180, 0.6);
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid #ffb6c1;
+      animation: typing 4s steps(30, end), blink .8s infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
     }
 
     p {
@@ -86,6 +78,41 @@
       font-size: 18px;
       color: #f0d0d5;
       font-style: italic;
+      transition: all 0.3s ease;
+    }
+
+    .signature:hover {
+      color: #ffd1e3;
+      text-shadow: 0 0 12px #ff7aa3;
+    }
+
+    .ending {
+      margin-top: 25px;
+      font-size: 17px;
+      color: #ffe1e8;
+      font-style: italic;
+      opacity: 0.85;
+    }
+
+    .snow, .hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .cursor-glow {
+      position: fixed;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ff9dbb 0%, transparent 60%);
+      pointer-events: none;
+      mix-blend-mode: screen;
+      z-index: 3;
     }
 
     @media (max-width: 768px) {
@@ -106,6 +133,7 @@
 </head>
 <body>
   <div class="snow"></div>
+  <div class="hearts"></div>
   <div class="cursor-glow" id="glow"></div>
   <div class="overlay"></div>
   <div class="poem-container">
@@ -126,25 +154,42 @@
       চিরকাল, প্রতিমুহূর্তে, প্রতিটা হৃদস্পন্দনে।
     </p>
     <div class="signature">— শুধুই তোমার জন্য 💌</div>
+    <div class="ending">আমি তোমাকেই খুঁজি প্রতিটি শব্দে...</div>
   </div>
 
-  <!-- Snowfall effect -->
+  <!-- Snowfall + Heart floating -->
   <script>
     const snowContainer = document.querySelector('.snow');
+    const heartContainer = document.querySelector('.hearts');
+
     function createSnowflake() {
-      const snowflake = document.createElement('div');
-      snowflake.innerHTML = '❄️';
-      snowflake.style.position = 'absolute';
-      snowflake.style.top = '-20px';
-      snowflake.style.left = Math.random() * window.innerWidth + 'px';
-      snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
-      snowflake.style.opacity = Math.random();
-      snowflake.style.animation = 'fall ' + (Math.random() * 5 + 5) + 's linear forwards';
-      snowContainer.appendChild(snowflake);
-      setTimeout(() => snowflake.remove(), 10000);
+      const flake = document.createElement('div');
+      flake.innerHTML = '❄️';
+      flake.style.position = 'absolute';
+      flake.style.top = '-20px';
+      flake.style.left = Math.random() * window.innerWidth + 'px';
+      flake.style.fontSize = (Math.random() * 10 + 10) + 'px';
+      flake.style.opacity = Math.random();
+      flake.style.animation = 'fall ' + (Math.random() * 5 + 5) + 's linear forwards';
+      snowContainer.appendChild(flake);
+      setTimeout(() => flake.remove(), 10000);
+    }
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.innerHTML = '💖';
+      heart.style.position = 'absolute';
+      heart.style.bottom = '-20px';
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.fontSize = (Math.random() * 15 + 15) + 'px';
+      heart.style.opacity = 0.8;
+      heart.style.animation = 'rise ' + (Math.random() * 4 + 4) + 's ease-in forwards';
+      heartContainer.appendChild(heart);
+      setTimeout(() => heart.remove(), 8000);
     }
 
     setInterval(createSnowflake, 150);
+    setInterval(createHeart, 300);
 
     const style = document.createElement('style');
     style.textContent = `
@@ -154,11 +199,17 @@
           opacity: 0;
         }
       }
+      @keyframes rise {
+        to {
+          transform: translateY(-100vh);
+          opacity: 0;
+        }
+      }
     `;
     document.head.append(style);
   </script>
 
-  <!-- Cursor glow effect -->
+  <!-- Cursor glow -->
   <script>
     const glow = document.getElementById('glow');
     document.addEventListener('mousemove', e => {
