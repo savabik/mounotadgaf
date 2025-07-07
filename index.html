@@ -158,70 +158,55 @@
   </div>
 
   <!-- Snowfall + Heart floating -->
-  <script>
-    const snowContainer = document.querySelector('.snow');
-    const heartContainer = document.querySelector('.hearts');
-
-    function createSnowflake() {
-      const flake = document.createElement('div');
-      flake.innerHTML = '❄️';
-      flake.style.position = 'absolute';
-      flake.style.top = '-20px';
-      flake.style.left = Math.random() * window.innerWidth + 'px';
-      flake.style.fontSize = (Math.random() * 10 + 10) + 'px';
-      flake.style.opacity = Math.random();
-      flake.style.animation = 'fall ' + (Math.random() * 5 + 5) + 's linear forwards';
-      snowContainer.appendChild(flake);
-      setTimeout(() => flake.remove(), 10000);
+ <script>
+    /* ---------- Snowflakes & Hearts ---------- */
+    const snowC=document.querySelector('.snow'),
+          heartC=document.querySelector('.hearts');
+    function makeFlake(txt,sizeMin,sizeVar,speedMin,speedVar,container,life){
+      const el=document.createElement('div');
+      el.textContent=txt;
+      el.style.position='absolute';
+      el.style.left=Math.random()*innerWidth+'px';
+      el.style.top='-20px';
+      const size=Math.random()*sizeVar+sizeMin;
+      el.style.fontSize=size+'px';
+      el.style.opacity=Math.random();
+      const dur=Math.random()*speedVar+speedMin;
+      el.style.animation='fall '+dur+'s linear forwards';
+      container.appendChild(el);
+      setTimeout(()=>el.remove(),life);
     }
+    setInterval(()=>makeFlake('❄️',10,10,5,5,snowC,10000),150);
+    setInterval(()=>makeFlake('💖',15,15,4,4,heartC,8000),300);
+    const styleAnim=document.createElement('style');
+    styleAnim.textContent='@keyframes fall{to{transform:translateY(100vh);opacity:0}}';
+    document.head.append(styleAnim);
 
-    function createHeart() {
-      const heart = document.createElement('div');
-      heart.innerHTML = '💖';
-      heart.style.position = 'absolute';
-      heart.style.bottom = '-20px';
-      heart.style.left = Math.random() * window.innerWidth + 'px';
-      heart.style.fontSize = (Math.random() * 15 + 15) + 'px';
-      heart.style.opacity = 0.8;
-      heart.style.animation = 'rise ' + (Math.random() * 4 + 4) + 's ease-in forwards';
-      heartContainer.appendChild(heart);
-      setTimeout(() => heart.remove(), 8000);
+    /* ---------- Rose‑Petal Rain (canvas) ---------- */
+    const canvas=document.getElementById('petals-canvas'),
+          ctx=canvas.getContext('2d');
+    function resize(){canvas.width=innerWidth;canvas.height=innerHeight;}
+    addEventListener('resize',resize);resize();
+    const petals=[...Array(30)].map(()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*4+2,d:Math.random()*40}));
+    function drawPetals(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      ctx.fillStyle='rgba(255,182,193,.6)';
+      petals.forEach(p=>{
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fill();
+        p.y+=Math.cos(p.d)+1+p.r/2;
+        p.x+=Math.sin(.3);
+        if(p.y>canvas.height){p.y=0;p.x=Math.random()*canvas.width;}
+      });
     }
+    setInterval(drawPetals,40);
 
-    setInterval(createSnowflake, 150);
-    setInterval(createHeart, 300);
-
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes fall {
-        to {
-          transform: translateY(100vh);
-          opacity: 0;
-        }
-      }
-      @keyframes rise {
-        to {
-          transform: translateY(-100vh);
-          opacity: 0;
-        }
-      }
-    `;
-    document.head.append(style);
-  </script>
-
-  <!-- Cursor glow -->
-  <script>
-    const glow = document.getElementById('glow');
-    document.addEventListener('mousemove', e => {
-      glow.style.left = `${e.clientX - 15}px`;
-      glow.style.top = `${e.clientY - 15}px`;
-    });
-    document.addEventListener('touchmove', e => {
-      if (e.touches.length > 0) {
-        glow.style.left = `${e.touches[0].clientX - 15}px`;
-        glow.style.top = `${e.touches[0].clientY - 15}px`;
-      }
-    });
+    /* ---------- Cursor Glow ---------- */
+    const glow=document.getElementById('glow');
+    function moveGlow(x,y){glow.style.left=x-15+'px';glow.style.top=y-15+'px';}
+    addEventListener('mousemove',e=>moveGlow(e.clientX,e.clientY));
+    addEventListener('touchmove',e=>{if(e.touches.length)moveGlow(e.touches[0].clientX,e.touches[0].clientY);});
   </script>
 </body>
-</html>
+</html
