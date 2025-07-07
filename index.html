@@ -4,19 +4,14 @@
   <meta charset="UTF-8" />
   <title>তুমি আছো...</title>
   <style>
-    /* Custom font faces */
     @font-face {
       font-family: 'f_R';
       src: url('f_R.ttf') format('truetype');
-      font-weight: normal;
-      font-style: normal;
     }
 
     @font-face {
       font-family: 'f_I';
       src: url('f_I.ttf') format('truetype');
-      font-weight: normal;
-      font-style: normal;
     }
 
     * {
@@ -32,11 +27,11 @@
       font-family: 'f_I', cursive, sans-serif;
       color: #f5e6e8;
       overflow: hidden;
-      position: relative;
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 20px;
+      position: relative;
     }
 
     .overlay {
@@ -45,27 +40,28 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(30, 20, 25, 0.6);
-      backdrop-filter: blur(3px);
+      background: rgba(20, 10, 20, 0.5);
+      backdrop-filter: blur(6px);
       z-index: 0;
     }
 
     .poem-container {
       position: relative;
       z-index: 2;
-      background: rgba(255, 245, 240, 0.07);
-      padding: 30px 35px;
-      border-radius: 22px;
-      backdrop-filter: blur(14px);
-      border: 1px solid rgba(230, 200, 200, 0.2);
-      box-shadow: 0 0 38px rgba(255, 180, 185, 0.3);
-      text-align: center;
-      max-width: 700px;
+      padding: 40px 50px;
+      border-radius: 24px;
+      max-width: 740px;
       max-height: 80vh;
       overflow-y: auto;
-      color: #a9747f; /* vintage dusty rose */
-      letter-spacing: 0.6px;
-      line-height: 1.9;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.06);
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.15),
+        0 0 60px rgba(255, 200, 210, 0.3),
+        0 4px 80px rgba(255, 150, 180, 0.3);
+      backdrop-filter: blur(20px) saturate(140%);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: all 0.5s ease;
     }
 
     .poem-container::-webkit-scrollbar {
@@ -79,63 +75,41 @@
 
     h1 {
       font-family: 'f_R', cursive;
-      font-size: 42px;
-      color: #f1c0c8;
-      margin-bottom: 22px;
-      text-shadow: 0 0 12px rgba(245, 182, 191, 0.6);
-      white-space: nowrap;
-      overflow: hidden;
-      border-right: 2px solid #f7d6db;
-      animation: typing 4s steps(30, end), blink 0.8s infinite;
-    }
-
-    @keyframes typing {
-      from {
-        width: 0;
-      }
-      to {
-        width: 100%;
-      }
-    }
-
-    @keyframes blink {
-      50% {
-        border-color: transparent;
-      }
+      font-size: 44px;
+      color: #fce3e8;
+      margin-bottom: 26px;
+      text-shadow: 0 0 12px rgba(255, 200, 210, 0.5);
+      border-bottom: 2px solid rgba(255, 170, 180, 0.4);
+      padding-bottom: 10px;
     }
 
     p {
       font-family: 'f_I', cursive;
-      font-size: 18px;
-      color: #d9b9bc;
-      text-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+      font-size: 20px;
+      color: #f3d6dc;
+      line-height: 2;
+      text-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
     }
 
     .signature {
-      margin-top: 26px;
+      margin-top: 28px;
       font-family: 'f_I', cursive;
-      font-size: 20px;
-      color: #e7a3ad;
+      font-size: 21px;
+      color: #f8b8c4;
       font-style: italic;
-      transition: all 0.3s ease;
-    }
-
-    .signature:hover {
-      color: #f8c6cd;
-      text-shadow: 0 0 15px #f9bbbe;
+      text-shadow: 0 0 12px rgba(255, 180, 200, 0.3);
     }
 
     .ending {
-      margin-top: 22px;
+      margin-top: 20px;
       font-family: 'f_I', cursive;
       font-size: 16px;
-      color: #e6bfc3;
+      color: #f3cbd3;
       font-style: italic;
-      opacity: 0.88;
+      opacity: 0.85;
     }
 
-    .snow,
-    .hearts {
+    .snow, .hearts {
       position: fixed;
       top: 0;
       left: 0;
@@ -158,20 +132,19 @@
 
     @media (max-width: 768px) {
       .poem-container {
-        padding: 25px 20px;
-        max-height: 85vh;
+        padding: 30px 20px;
       }
 
       h1 {
-        font-size: 30px;
+        font-size: 32px;
       }
 
       p {
-        font-size: 16px;
+        font-size: 17px;
       }
 
       .signature {
-        font-size: 16px;
+        font-size: 18px;
       }
 
       .ending {
@@ -208,7 +181,7 @@
 
   <script>
     const snowC = document.querySelector('.snow'),
-      heartC = document.querySelector('.hearts');
+          heartC = document.querySelector('.hearts');
 
     function makeFlake(txt, sizeMin, sizeVar, speedMin, speedVar, container, life) {
       const el = document.createElement('div');
