@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>তুমি আছো...</title>
-  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri&family=Great+Vibes&family=Kaushan+Script&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -23,13 +23,34 @@
       overflow: hidden;
     }
 
+    .snow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    .cursor-glow {
+      position: fixed;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ff9dbb 0%, transparent 60%);
+      pointer-events: none;
+      mix-blend-mode: screen;
+      z-index: 1000;
+    }
+
     .overlay {
       position: absolute;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.6); /* dark overlay */
-      z-index: 0;
+      background: rgba(0, 0, 0, 0.6);
       backdrop-filter: blur(3px);
+      z-index: 0;
     }
 
     .poem-container {
@@ -40,16 +61,17 @@
       border-radius: 20px;
       backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 0 40px rgba(255, 160, 176, 0.4);
       text-align: center;
       max-width: 720px;
     }
 
     h1 {
-      font-family: 'Great Vibes', cursive;
+      font-family: 'Kaushan Script', cursive;
       font-size: 46px;
-      color: #ffccd5;
+      color: #ffcdd9;
       margin-bottom: 25px;
+      text-shadow: 0 0 10px rgba(255, 150, 180, 0.6);
     }
 
     p {
@@ -83,6 +105,8 @@
   </style>
 </head>
 <body>
+  <div class="snow"></div>
+  <div class="cursor-glow" id="glow"></div>
   <div class="overlay"></div>
   <div class="poem-container">
     <h1>তুমি আছো...</h1>
@@ -103,5 +127,50 @@
     </p>
     <div class="signature">— শুধুই তোমার জন্য 💌</div>
   </div>
+
+  <!-- Snowfall effect -->
+  <script>
+    const snowContainer = document.querySelector('.snow');
+    function createSnowflake() {
+      const snowflake = document.createElement('div');
+      snowflake.innerHTML = '❄️';
+      snowflake.style.position = 'absolute';
+      snowflake.style.top = '-20px';
+      snowflake.style.left = Math.random() * window.innerWidth + 'px';
+      snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
+      snowflake.style.opacity = Math.random();
+      snowflake.style.animation = 'fall ' + (Math.random() * 5 + 5) + 's linear forwards';
+      snowContainer.appendChild(snowflake);
+      setTimeout(() => snowflake.remove(), 10000);
+    }
+
+    setInterval(createSnowflake, 150);
+
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes fall {
+        to {
+          transform: translateY(100vh);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.append(style);
+  </script>
+
+  <!-- Cursor glow effect -->
+  <script>
+    const glow = document.getElementById('glow');
+    document.addEventListener('mousemove', e => {
+      glow.style.left = `${e.clientX - 15}px`;
+      glow.style.top = `${e.clientY - 15}px`;
+    });
+    document.addEventListener('touchmove', e => {
+      if (e.touches.length > 0) {
+        glow.style.left = `${e.touches[0].clientX - 15}px`;
+        glow.style.top = `${e.touches[0].clientY - 15}px`;
+      }
+    });
+  </script>
 </body>
 </html>
