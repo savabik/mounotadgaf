@@ -12,15 +12,17 @@
     }
 
     body {
-      height: 100vh;
+      min-height: 100vh;
       background: url('backiee-80266-landscape.jpg') no-repeat center center fixed;
       background-size: cover;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       font-family: 'Hind Siliguri', sans-serif;
       color: #fbeff1;
       overflow: hidden;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
     }
 
     .overlay {
@@ -36,20 +38,31 @@
       position: relative;
       z-index: 2;
       background: rgba(255, 255, 255, 0.08);
-      padding: 40px 50px;
+      padding: 30px 35px;
       border-radius: 20px;
       backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 0 40px rgba(255, 160, 176, 0.4);
+      box-shadow: 0 0 30px rgba(255, 160, 176, 0.4);
       text-align: center;
-      max-width: 720px;
+      max-width: 700px;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    .poem-container::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .poem-container::-webkit-scrollbar-thumb {
+      background-color: rgba(255, 192, 203, 0.3);
+      border-radius: 10px;
     }
 
     h1 {
       font-family: 'Kaushan Script', cursive;
-      font-size: 46px;
+      font-size: 40px;
       color: #ffcdd9;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
       text-shadow: 0 0 10px rgba(255, 150, 180, 0.6);
       white-space: nowrap;
       overflow: hidden;
@@ -67,15 +80,15 @@
     }
 
     p {
-      font-size: 20px;
-      line-height: 2;
+      font-size: 18px;
+      line-height: 1.8;
       color: #fbeff3;
-      text-shadow: 0 0 4px rgba(0,0,0,0.4);
+      text-shadow: 0 0 3px rgba(0,0,0,0.3);
     }
 
     .signature {
-      margin-top: 30px;
-      font-size: 18px;
+      margin-top: 25px;
+      font-size: 16px;
       color: #f0d0d5;
       font-style: italic;
       transition: all 0.3s ease;
@@ -83,12 +96,12 @@
 
     .signature:hover {
       color: #ffd1e3;
-      text-shadow: 0 0 12px #ff7aa3;
+      text-shadow: 0 0 10px #ff7aa3;
     }
 
     .ending {
-      margin-top: 25px;
-      font-size: 17px;
+      margin-top: 20px;
+      font-size: 15px;
       color: #ffe1e8;
       font-style: italic;
       opacity: 0.85;
@@ -117,16 +130,25 @@
 
     @media (max-width: 768px) {
       .poem-container {
-        margin: 20px;
-        padding: 30px;
+        padding: 25px 20px;
+        max-height: 85vh;
       }
 
       h1 {
-        font-size: 32px;
+        font-size: 28px;
       }
 
       p {
-        font-size: 18px;
+        font-size: 16px;
+        line-height: 1.6;
+      }
+
+      .signature {
+        font-size: 14px;
+      }
+
+      .ending {
+        font-size: 14px;
       }
     }
   </style>
@@ -138,76 +160,60 @@
   <div class="overlay"></div>
   <div class="poem-container">
     <h1>তুমি আছো...</h1>
-<p>
-  চোখ বন্ধ করলেই—</br>
-  যেন তোমার নিঃশ্বাস ছুঁয়ে যায় আমার গাল।</br>
-  হাওয়ার সঙ্গে মিশে আসে তোমার গন্ধ,</br>
-  অন্ধকারেও দেখা পাই তোমার ছায়ার।</br>
-    </br>
-  ভোরের আলোয় ভিজে থাকে তোমার নাম,</br>
-  পিঠে জমা স্মৃতির পাতায়—</br>
-  এখনও তুমিই লেখা হয়ে থাকো বারবার।</br>
-    </br>
-  দূরে থেকেও, তুমি কাছে,</br>
-  নিঃশব্দে, নিঃসীমে, গভীর চেনা হয়ে।</br>
-  আমি আর তুমি—</br>
-  একটাই সময়, একটাই ব্যথা,</br>
-  ভালোবাসার একই আকাশে গাঁথা দু'টি তারা...</br>
-</p>
-<div class="signature">— হৃদয়ের ভেতরকার এক চিরন্তন তুমি ✨</div>
-<div class="ending">তোমাকে লিখতে গিয়ে, আমি নিজেকেই পড়ে ফেলি...</div>
+    <p>
+      চোখ বন্ধ করলেই—<br>
+      যেন তোমার নিঃশ্বাস ছুঁয়ে যায় আমার গাল।<br>
+      হাওয়ার সঙ্গে মিশে আসে তোমার গন্ধ,<br>
+      অন্ধকারেও দেখা পাই তোমার ছায়ার।<br><br>
+      ভোরের আলোয় ভিজে থাকে তোমার নাম,<br>
+      পিঠে জমা স্মৃতির পাতায়—<br>
+      এখনও তুমিই লেখা হয়ে থাকো বারবার।<br><br>
+      দূরে থেকেও, তুমি কাছে,<br>
+      নিঃশব্দে, নিঃসীমে, গভীর চেনা হয়ে।<br>
+      আমি আর তুমি—<br>
+      একটাই সময়, একটাই ব্যথা,<br>
+      ভালোবাসার একই আকাশে গাঁথা দু'টি তারা...<br>
+    </p>
+    <div class="signature">— হৃদয়ের ভেতরকার এক চিরন্তন তুমি ✨</div>
+    <div class="ending">তোমাকে লিখতে গিয়ে, আমি নিজেকেই পড়ে ফেলি...</div>
+  </div>
 
+  <script>
+    const snowC = document.querySelector('.snow'),
+          heartC = document.querySelector('.hearts');
 
-  <!-- Snowfall + Heart floating -->
- <script>
-    /* ---------- Snowflakes & Hearts ---------- */
-    const snowC=document.querySelector('.snow'),
-          heartC=document.querySelector('.hearts');
-    function makeFlake(txt,sizeMin,sizeVar,speedMin,speedVar,container,life){
-      const el=document.createElement('div');
-      el.textContent=txt;
-      el.style.position='absolute';
-      el.style.left=Math.random()*innerWidth+'px';
-      el.style.top='-20px';
-      const size=Math.random()*sizeVar+sizeMin;
-      el.style.fontSize=size+'px';
-      el.style.opacity=Math.random();
-      const dur=Math.random()*speedVar+speedMin;
-      el.style.animation='fall '+dur+'s linear forwards';
+    function makeFlake(txt, sizeMin, sizeVar, speedMin, speedVar, container, life) {
+      const el = document.createElement('div');
+      el.textContent = txt;
+      el.style.position = 'absolute';
+      el.style.left = Math.random() * innerWidth + 'px';
+      el.style.top = '-20px';
+      const size = Math.random() * sizeVar + sizeMin;
+      el.style.fontSize = size + 'px';
+      el.style.opacity = Math.random();
+      const dur = Math.random() * speedVar + speedMin;
+      el.style.animation = 'fall ' + dur + 's linear forwards';
       container.appendChild(el);
-      setTimeout(()=>el.remove(),life);
+      setTimeout(() => el.remove(), life);
     }
-    setInterval(()=>makeFlake('❄️',10,10,5,5,snowC,10000),150);
-    setInterval(()=>makeFlake('💖',15,15,4,4,heartC,8000),300);
-    const styleAnim=document.createElement('style');
-    styleAnim.textContent='@keyframes fall{to{transform:translateY(100vh);opacity:0}}';
+
+    setInterval(() => makeFlake('❄️', 10, 10, 5, 5, snowC, 10000), 150);
+    setInterval(() => makeFlake('💖', 15, 15, 4, 4, heartC, 8000), 300);
+
+    const styleAnim = document.createElement('style');
+    styleAnim.textContent = '@keyframes fall { to { transform: translateY(100vh); opacity: 0; } }';
     document.head.append(styleAnim);
 
-    /* ---------- Rose‑Petal Rain (canvas) ---------- */
-    const canvas=document.getElementById('petals-canvas'),
-          ctx=canvas.getContext('2d');
-    function resize(){canvas.width=innerWidth;canvas.height=innerHeight;}
-    addEventListener('resize',resize);resize();
-    const petals=[...Array(30)].map(()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*4+2,d:Math.random()*40}));
-    function drawPetals(){
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      ctx.fillStyle='rgba(255,182,193,.6)';
-      petals.forEach(p=>{
-        ctx.beginPath();
-        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fill();
-        p.y+=Math.cos(p.d)+1+p.r/2;
-        p.x+=Math.sin(.3);
-        if(p.y>canvas.height){p.y=0;p.x=Math.random()*canvas.width;}
-      });
+    const glow = document.getElementById('glow');
+    function moveGlow(x, y) {
+      glow.style.left = x - 15 + 'px';
+      glow.style.top = y - 15 + 'px';
     }
-    setInterval(drawPetals,40);
 
-    /* ---------- Cursor Glow ---------- */
-    const glow=document.getElementById('glow');
-    function moveGlow(x,y){glow.style.left=x-15+'px';glow.style.top=y-15+'px';}
-    addEventListener('mousemove',e=>moveGlow(e.clientX,e.clientY));
-    addEventListener('touchmove',e=>{if(e.touches.length)moveGlow(e.touches[0].clientX,e.touches[0].clientY);});
+    addEventListener('mousemove', e => moveGlow(e.clientX, e.clientY));
+    addEventListener('touchmove', e => {
+      if (e.touches.length) moveGlow(e.touches[0].clientX, e.touches[0].clientY);
+    });
   </script>
 </body>
-</html
+</html>
